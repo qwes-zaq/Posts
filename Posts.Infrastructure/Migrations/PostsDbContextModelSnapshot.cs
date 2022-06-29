@@ -228,6 +228,9 @@ namespace Posts.Infrastructure.Migrations
                     b.Property<DateTime>("AddedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UpdatedById")
                         .HasColumnType("nvarchar(450)");
 

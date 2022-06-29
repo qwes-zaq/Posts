@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Posts.Infrastructure.Persistance.Base
 {
-    public class Repository<T> : IRepository<T> where T : class
+    public abstract class Repository<T> : IRepository<T> where T : class
     {
         protected readonly PostsDbContext _db;
 
@@ -22,17 +22,18 @@ namespace Posts.Infrastructure.Persistance.Base
             _dbSet = db.Set<T>();
         }
 
-        public void Add(T entity) => _dbSet.Add(entity);
-        public void AddRange(IEnumerable<T> entities) => _dbSet.AddRange(entities);
-        public int Count(Expression<Func<T, bool>> predicate) => _dbSet.Count(predicate);
-        public IQueryable<T> Find(Expression<Func<T, bool>> predicate) => _dbSet.Where(predicate);
-        public T Get(Expression<Func<T, bool>> predicate) => _dbSet.FirstOrDefault(predicate);
-        public IQueryable<T> GetAll() => _dbSet;
-        public void Remove(T entity) => _dbSet.Remove(entity);
-        public void RemoveRange(IEnumerable<T> entities) => _dbSet.RemoveRange(entities);
-        public void Update(T entity) => _dbSet.Update(entity);
-        public void UpdateRange(IEnumerable<T> entities) => _dbSet.UpdateRange(entities);
-        public int SaveChanges() => _db.SaveChanges();
+        public virtual void Add(T entity) => _dbSet.Add(entity);
+        public virtual void AddRange(IEnumerable<T> entities) => _dbSet.AddRange(entities);
+        public virtual void Remove(T entity) => _dbSet.Remove(entity);
+        public virtual void RemoveRange(IEnumerable<T> entities) => _dbSet.RemoveRange(entities);
+        public virtual int Count(Expression<Func<T, bool>> predicate) => _dbSet.Count(predicate);
+        public virtual IQueryable<T> Find(Expression<Func<T, bool>> predicate) => _dbSet.Where(predicate);
+        public virtual T Get(Expression<Func<T, bool>> predicate) => _dbSet.FirstOrDefault(predicate);
+        public virtual IQueryable<T> GetAll() => _dbSet;
+        public virtual int SaveChanges() => _db.SaveChanges();
+        public virtual Task<int> SaveChangesAsync() => _db.SaveChangesAsync();
 
+        public abstract void Update(T entity);
+        public abstract void UpdateRange(IEnumerable<T> entities);
     }
 }

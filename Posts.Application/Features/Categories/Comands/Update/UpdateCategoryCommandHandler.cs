@@ -23,11 +23,7 @@ namespace Posts.Application.Features.Categories.Comands.Update
         }
         public async Task<int> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var oldCategory = _categoryRepository.Get(x => x.Id == request.Id);
             var category = _mapper.Map<Category>(request);
-            category.AddedBy = oldCategory.AddedBy;
-            category.AddedDate = oldCategory.AddedDate;
-            category.UpdatedDate = DateTime.Now;
             _categoryRepository.Update(category);
             _categoryRepository.SaveChanges();
             return category.Id;

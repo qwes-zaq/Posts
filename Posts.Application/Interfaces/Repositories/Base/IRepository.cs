@@ -21,6 +21,7 @@ namespace Posts.Application.Interfaces.Repositories.Base
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
-        public int SaveChanges();
+        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

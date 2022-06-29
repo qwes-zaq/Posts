@@ -16,5 +16,6 @@ namespace Posts.Application.DTO.PostDTO
         public string AddedById { get; set; }
 
         public int CategoryId { get; set; }
+
     }
 }

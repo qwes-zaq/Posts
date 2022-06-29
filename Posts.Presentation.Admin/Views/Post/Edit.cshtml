@@ -1,0 +1,27 @@
+﻿@model PostEditVM
+
+
+
+<h4>Post Create</h4>
+<hr>
+<h6>@ViewBag.Info</h6>
+<hr>
+<form asp-action="Edit" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="@Model.OldVersion.Id"  />
+    <select asp-for="@Model.OldVersion.CategoryId" asp-items="@Model.CategoryList"></select>
+    <div class="form-group">
+        <label asp-for="OldVersion.Title" class="control-label"></label>
+        <input asp-for="OldVersion.Title" class="form-control" />
+        <span asp-validation-for="OldVersion.Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OldVersion.Body" class="control-label"></label>
+        <input asp-for="OldVersion.Body" class="form-control" />
+        <span asp-validation-for="OldVersion.Body" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Edit" class="btn btn-primary" />
+    </div>
+
+
+</form>

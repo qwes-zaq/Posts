@@ -13,6 +13,7 @@ namespace Posts.Domain.Entities
             Posts = new List<Post>();
         }
         public int Id { get; set; }
+        public string Title { get; set; }
         public DateTime AddedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
 

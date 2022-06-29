@@ -24,9 +24,13 @@ namespace Posts.Application.Features.Posts.Queries.GetList
 
         public async Task<PostListDTO> Handle(GetPostListQuery request, CancellationToken cancellationToken)
         {
-            PostListDTO postList = new() {
-                List = _mapper.Map<IEnumerable<PostDTO>>(_postRepository.GetAll())//
-        };
+
+            PostListDTO postList = new() {};
+
+             postList.List =request.Predicate == null ? 
+                _mapper.Map<IEnumerable<PostDTO>>(_postRepository.GetAll()) : 
+                _mapper.Map<IEnumerable<PostDTO>>(_postRepository.Find(request.Predicate));
+
             return postList;
         }
     }

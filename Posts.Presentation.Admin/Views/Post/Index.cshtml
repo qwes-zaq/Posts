@@ -1,0 +1,53 @@
+﻿@model PostListDTO
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                  Id
+            </th>
+            <th>
+                  Status
+            </th>
+            <th>
+                  Title
+            </th>
+            <th>
+                  Category
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.List) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Title)
+            </td>
+            <td>
+                <a asp-area="" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-area="" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-area="" asp-action="Details" asp-route-id="@item.Id">Details</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

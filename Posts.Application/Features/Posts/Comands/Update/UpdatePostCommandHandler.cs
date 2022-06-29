@@ -23,11 +23,7 @@ namespace Posts.Application.Features.Posts.Comands.Update
         }
         public async Task<int> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
-            var oldPost = _postRepository.Get(x => x.Id == request.Id);
             var post = _mapper.Map<Post>(request);
-            post.AddedBy = oldPost.AddedBy;
-            post.AddedDate = oldPost.AddedDate;
-            post.UpdatedDate = DateTime.Now;
             _postRepository.Update(post);
             _postRepository.SaveChanges();
             return post.Id;
